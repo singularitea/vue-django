@@ -1,3 +1,6 @@
 from django.contrib import admin
+from sensor.models import SensorDetail, SensorReading
 
-# Register your models here.
+admin.site.register(SensorDetail)
+
+admin.site.register(SensorReading)
