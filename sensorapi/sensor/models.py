@@ -8,7 +8,7 @@ class SensorDetail(models.Model):
     easting = models.DecimalField(max_digits=14, decimal_places=4)
     northing = models.DecimalField(max_digits=14, decimal_places=4)
     elevation = models.DecimalField(max_digits=10, decimal_places=4)
-    install_date = models.DateTimeField()
+    install_date = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     tags = TaggableManager()
