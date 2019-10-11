@@ -1,15 +1,28 @@
 from datetime import datetime
 from django.utils.timesince import timesince
 from rest_framework import serializers
-from sensor.models import SensorDetail
+from sensor.models import SensorDetail, SensorReading
+
+
+class SensorReadingSerializer(serializers.ModelSerializer):
+
+    sensor_name = serializers.StringRelatedField(read_only=True)
+
+    class Meta:
+        model = SensorReading
+        # fields = "__all__" # all fields
+        # fields = ("sensor_name", "easting" , "northing") # only these fields
+        exclude = ("id",)
+
 
 class SensorDetailSerializer(serializers.ModelSerializer):
 
     time_since_install =serializers.SerializerMethodField()
-
+    readings = SensorReadingSerializer(many=True, read_only=True)
+    
     class Meta:
         model = SensorDetail
-        # fields = "_all_" # all fields
+        # fields = "__all__" # all fields
         # fields = ("sensor_name", "easting" , "northing") # only these fields
         exclude = ("id",)
 
