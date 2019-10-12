@@ -6,7 +6,8 @@ from sensor.models import SensorDetail, SensorReading
 
 class SensorReadingSerializer(serializers.ModelSerializer):
 
-    sensor_name = serializers.StringRelatedField(read_only=True)
+    # FIXME: sensor_name shown as primary key in API if use the below line create does not work
+    # sensor_name = serializers.StringRelatedField(read_only=True)
 
     class Meta:
         model = SensorReading

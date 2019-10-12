@@ -2,7 +2,7 @@ from django.db import models
 from taggit.managers import TaggableManager
 
 class SensorDetail(models.Model):
-    sensor_name = models.CharField(max_length=70)
+    sensor_name = models.CharField(unique=True, max_length=70)
     latitude = models.DecimalField(max_digits=14, decimal_places=4)
     longitude = models.DecimalField(max_digits=14, decimal_places=4)
     easting = models.DecimalField(max_digits=14, decimal_places=4)
@@ -14,6 +14,9 @@ class SensorDetail(models.Model):
     tags = TaggableManager()
     def __str__(self):
         return str(self.sensor_name)
+    class Meta:
+        ordering = ['sensor_name']
+
 
 class SensorReading(models.Model):
     sensor_name = models.ForeignKey(SensorDetail, db_column='sensor_name', on_delete=models.CASCADE)
